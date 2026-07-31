@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GLOBAL TRANSIT | Ship Smarter, Track Faster</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;}
+.hero-bg{background-image:url(https://lh3.googleusercontent.com/aida-public/AB6AXuDhsgXIp6p8ms67j5ZQiThuOPucc0L54z-TvQsj8JxKIonRd1YCOItFCVWGo0kuswKpOlLALD6bkjG4UIfIrsNrXcdHQGOkjuEkod7PO27DsLi90yKpmagocYQR7QQQiXJDDgEBrW4SGlFBhRvK4o5lawRzkvHftF2lmO5H1Rke6yHO1IyGMp-rtOAKeba-TROawPNyaNWkB5mKp42McS8t3wHHJhRzrUpXzLIxPgKPUhEJAUTNd_s-He1vCHOP52ZkbpEkzKlN-tE);background-size:cover;background-position:center;}
+.wordmark{font-family:'Inter',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:-0.04em;color:#111827;}
+.wordmark span{color:#c81e2c;}
+.wordmark-line{display:block;height:2px;background:#c81e2c;border-radius:1px;margin-top:2px;}
+.wordmark-sub{display:block;font-size:0.5rem;font-weight:600;letter-spacing:0.18em;color:#94a3b8;text-transform:uppercase;margin-top:1px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 0.4s ease forwards;}
+@keyframes ping2{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.live-ping{animation:ping2 2s infinite;}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.glass-nav{background:rgba(255,255,255,0.85)!important;backdrop-filter:blur(20px) saturate(180%)!important;-webkit-backdrop-filter:blur(20px) saturate(180%)!important;border-bottom:1px solid rgba(255,255,255,0.5)!important;}
+</style>
+</head>
+<body class="bg-white text-gray-900">
+
+<script>window.API_BASE='http://localhost:3000';</script>
+
+<!-- NAV -->
+<nav class="glass-nav sticky top-0 z-50 shadow-sm">
+  <div class="flex justify-between items-center px-5 h-16 max-w-7xl mx-auto">
+    <a href="#" class="no-underline">
+      <div class="wordmark">GLOBAL<span> TRANSIT</span><span class="wordmark-line"></span><span class="wordmark-sub">Global Logistics</span></div>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#features" class="text-gray-500 hover:text-red-600 text-sm font-medium no-underline">Services</a>
+      <a href="#how" class="text-gray-500 hover:text-red-600 text-sm font-medium no-underline">How It Works</a>
+      <a href="#testimonials" class="text-gray-500 hover:text-red-600 text-sm font-medium no-underline">Reviews</a>
+      <a href="admin.html" class="text-gray-500 hover:text-red-600 text-sm font-medium no-underline">Support</a>
+    </div>
+    <button onclick="openModal()" class="bg-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-red-700 transition-colors">Track Parcel</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="relative min-h-[780px] flex items-center overflow-hidden">
+  <div class="absolute inset-0 hero-bg"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-5">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 px-3 py-1.5 rounded-full text-xs font-semibold mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-red-600 live-ping inline-block"></span>
+        International Freight Partner
+      </div>
+      <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-5" style="letter-spacing:-0.03em;">Ship Smarter,<br/><span class="text-red-600">Track Faster</span></h1>
+      <p class="text-gray-500 text-lg mb-8 leading-relaxed max-w-xl">Experience next-generation global logistics. Real-time intelligence for every mile of your cargo's journey.</p>
+      <div class="flex flex-col sm:flex-row gap-0 max-w-xl">
+        <div class="relative flex-1">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input id="heroInput" type="text" placeholder="Enter tracking number…" class="w-full h-14 pl-10 pr-4 border border-gray-200 rounded-t-xl sm:rounded-l-xl sm:rounded-tr-none bg-white text-gray-900 text-sm focus:outline-none focus:border-red-500" onkeydown="if(event.key==='Enter')heroTrack()"/>
+        </div>
+        <button onclick="heroTrack()" class="h-14 px-8 bg-red-600 text-white font-bold text-sm rounded-b-xl sm:rounded-r-xl sm:rounded-bl-none hover:bg-red-700 transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
+          Track Now
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </button>
+      </div>
+      <p class="text-gray-400 text-xs mt-2">You'll be asked for the recipient's phone number to view full details.</p>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="bg-gray-900 py-10 px-5">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div><div class="text-3xl font-black text-white">10M<span class="text-red-400">+</span></div><div class="text-xs font-semibold uppercase tracking-widest text-gray-400 mt-1">Parcels Delivered</div></div>
+    <div><div class="text-3xl font-black text-white">200<span class="text-red-400">+</span></div><div class="text-xs font-semibold uppercase tracking-widest text-gray-400 mt-1">Countries Covered</div></div>
+    <div><div class="text-3xl font-black text-white">99.9<span class="text-red-400">%</span></div><div class="text-xs font-semibold uppercase tracking-widest text-gray-400 mt-1">Success Rate</div></div>
+    <div><div class="text-3xl font-black text-white">24<span class="text-red-400">/7</span></div><div class="text-xs font-semibold uppercase tracking-widest text-gray-400 mt-1">Global Support</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-16 bg-gray-50 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="inline-block bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">Why Choose Us</div>
+      <h2 class="text-3xl font-black text-gray-900 mb-3" style="letter-spacing:-0.02em;">Precision Logistics Excellence</h2>
+      <p class="text-gray-500 max-w-xl mx-auto text-sm">Advanced technology with a global network to ensure your cargo arrives on time, every time.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+      <div class="rounded-2xl overflow-hidden h-72 lg:h-[420px]">
+        <img src="https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Logistics" class="w-full h-full object-cover"/>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <h3 class="font-bold text-gray-900 mb-1 text-sm">Lightning Fast</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Optimized routing for the shortest, most efficient path globally.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+          <h3 class="font-bold text-gray-900 mb-1 text-sm">Secure Handling</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Advanced monitoring protects your shipments at every terminal.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h3 class="font-bold text-gray-900 mb-1 text-sm">Real-Time Tracking</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Live checkpoint updates. Know where your shipment is every moment.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg></div>
+          <h3 class="font-bold text-gray-900 mb-1 text-sm">Global Network</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">200+ countries with seamless door-to-door delivery anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="py-16 bg-white px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="inline-block bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">Simple Process</div>
+      <h2 class="text-3xl font-black text-gray-900 mb-3" style="letter-spacing:-0.02em;">Streamlined Journey</h2>
+      <p class="text-gray-500 text-sm">Four simple steps to global delivery.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="flex flex-col items-center text-center">
+        <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-lg">1</div>
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 w-full">
+          <h4 class="font-bold text-gray-900 mb-1 text-sm">Book</h4>
+          <p class="text-gray-500 text-xs">Schedule your pickup online in seconds.</p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-lg">2</div>
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 w-full">
+          <h4 class="font-bold text-gray-900 mb-1 text-sm">Pack</h4>
+          <p class="text-gray-500 text-xs">We ensure your parcel is safe for the journey.</p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-lg">3</div>
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 w-full">
+          <h4 class="font-bold text-gray-900 mb-1 text-sm">Track</h4>
+          <p class="text-gray-500 text-xs">Monitor every movement with real-time updates.</p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-lg mb-4 shadow-lg">4</div>
+        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 w-full">
+          <h4 class="font-bold text-gray-900 mb-1 text-sm">Deliver</h4>
+          <p class="text-gray-500 text-xs">Safe delivery with proof of receipt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="py-16 bg-white px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <div class="inline-block bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">Global Operations</div>
+      <h2 class="text-3xl font-black text-gray-900 mb-3" style="letter-spacing:-0.02em;">Moving Cargo Across Every Corner of the World</h2>
+      <p class="text-gray-500 text-sm max-w-xl mx-auto">From seaports to airports, sorting facilities to last-mile delivery — we track every step.</p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <div class="rounded-2xl overflow-hidden w-full" style="height:260px;">
+        <img src="https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cargo ship" class="w-full h-full object-cover"/>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-2xl overflow-hidden" style="height:170px;"><img src="https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Warehouse" class="w-full h-full object-cover"/></div>
+        <div class="rounded-2xl overflow-hidden" style="height:170px;"><img src="https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cargo plane" class="w-full h-full object-cover"/></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-2xl overflow-hidden" style="height:170px;"><img src="https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Containers" class="w-full h-full object-cover"/></div>
+        <div class="rounded-2xl overflow-hidden" style="height:170px;"><img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Truck" class="w-full h-full object-cover"/></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-center"><p class="text-2xl font-black text-gray-900">150+</p><p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">Partner Airlines</p></div>
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-center"><p class="text-2xl font-black text-gray-900">800+</p><p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">Shipping Routes</p></div>
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-center"><p class="text-2xl font-black text-gray-900">50+</p><p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">Global Warehouses</p></div>
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-center"><p class="text-2xl font-black text-gray-900">2M+</p><p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">Happy Receivers</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="py-16 bg-gray-50 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <div class="inline-block bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">Client Stories</div>
+      <h2 class="text-3xl font-black text-gray-900 mb-2" style="letter-spacing:-0.02em;">What Our Clients Are Saying</h2>
+      <p class="text-gray-400 text-sm">Over 10,000 businesses ship with confidence using GLOBAL TRANSIT every day.</p>
+    </div>
+    <div class="bg-gray-900 rounded-2xl p-7 mb-5">
+      <div class="flex gap-1 text-yellow-400 mb-4">★★★★★</div>
+      <p class="text-white text-base leading-relaxed mb-6">Switching to GLOBAL TRANSIT cut our delivery disputes by 80%. The checkpoint-by-checkpoint journey view gives our clients total confidence — they know exactly where their package is at all times.</p>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0">SK</div>
+        <div><p class="text-white font-bold text-sm">Sarah Kim</p><p class="text-gray-400 text-xs">Head of Imports, PrimeMed Asia</p></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl overflow-hidden border border-gray-100">
+        <div class="h-40 overflow-hidden"><img src="https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Warehouse" class="w-full h-full object-cover"/></div>
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-black text-xs">JM</div>
+              <div><p class="font-bold text-gray-900 text-sm">James Mitchell</p><p class="text-gray-400 text-xs">Founder, SwiftParts UK</p></div>
+            </div>
+            <div class="flex gap-0.5 text-yellow-400 text-xs">★★★★★</div>
+          </div>
+          <p class="text-gray-600 text-xs leading-relaxed">GLOBAL TRANSIT's real-time updates mean I never have to chase couriers. The photo feature is a game changer.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden border border-gray-100">
+        <div class="h-40 overflow-hidden"><img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Truck" class="w-full h-full object-cover"/></div>
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-black text-xs">FD</div>
+              <div><p class="font-bold text-gray-900 text-sm">Fatima Diallo</p><p class="text-gray-400 text-xs">Procurement Manager, Dakar Textiles</p></div>
+            </div>
+            <div class="flex gap-0.5 text-yellow-400 text-xs">★★★★★</div>
+          </div>
+          <p class="text-gray-600 text-xs leading-relaxed">Now our receivers get a live link to track their shipment themselves. It's professional and our customers love it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-red-600 px-5 py-14 text-center">
+  <h2 class="text-3xl font-black text-white mb-3" style="letter-spacing:-0.02em;">Ready to Ship Smarter?</h2>
+  <p class="text-red-100 mb-6 text-sm">Join thousands of businesses that trust GLOBAL TRANSIT for their mission-critical logistics.</p>
+  <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-sm mx-auto">
+    <button onclick="openModal()" class="bg-white text-red-600 px-6 py-3 rounded-xl font-bold text-sm hover:bg-red-50 transition-colors w-full">Track a Shipment</button>
+    <a href="admin.html" class="border-2 border-white/40 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-white/10 transition-colors no-underline w-full text-center">Admin Panel</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-950 py-12 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <div class="wordmark text-white mb-3" style="color:#fff;">GLOBAL<span style="color:#f4a3a9;">-TRACK</span><span class="wordmark-line" style="background:#f4a3a9;"></span><span class="wordmark-sub" style="color:#475569;">Global Logistics</span></div>
+        <p class="text-gray-400 text-xs leading-relaxed">Making global logistics simple, transparent, and reliable for everyone.</p>
+      </div>
+      <div>
+        <p class="text-red-400 font-bold text-xs mb-3">Company</p>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">About Us</a>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Careers</a>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Newsroom</a>
+      </div>
+      <div>
+        <p class="text-red-400 font-bold text-xs mb-3">Services</p>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Express Courier</a>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Ocean Freight</a>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Warehousing</a>
+      </div>
+      <div>
+        <p class="text-red-400 font-bold text-xs mb-3">Support</p>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Help Center</a>
+        <a href="admin.html" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Admin Login</a>
+        <a href="#" class="block text-gray-400 text-xs mb-2 hover:text-white no-underline">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
+      <p class="text-gray-500 text-xs">© 2026 GLOBAL TRANSIT Logistics. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-gray-500 text-xs hover:text-white no-underline">Terms</a>
+        <a href="#" class="text-gray-500 text-xs hover:text-white no-underline">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TRACKING MODAL -->
+<div id="trackModal" class="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-gray-900/60 backdrop-blur-sm hidden">
+  <div class="bg-white w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col fade-up">
+    <div class="bg-gray-900 text-white p-4 flex justify-between items-center flex-shrink-0">
+      <div>
+        <p class="text-xs uppercase tracking-widest text-gray-400 mb-0.5">Shipment Status</p>
+        <div class="wordmark text-white" style="color:#fff;font-size:1rem;">GLOBAL<span style="color:#f4a3a9;">-TRACK</span></div>
+      </div>
+      <button onclick="closeModal()" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors text-white">✕</button>
+    </div>
+    <div class="p-4 border-b border-gray-100 flex-shrink-0">
+      <div class="flex flex-col gap-2">
+        <input id="modalInput" type="text" placeholder="Enter tracking number…" class="border border-gray-200 rounded-xl px-4 py-3 text-sm font-mono focus:outline-none focus:border-red-500" onkeydown="if(event.key==='Enter')document.getElementById('modalPhone').focus()"/>
+        <input id="modalPhone" type="tel" placeholder="Recipient's phone number…" class="border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500" onkeydown="if(event.key==='Enter')doTrack()"/>
+        <button id="trackBtn" onclick="doTrack()" class="bg-red-600 text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-red-700 transition-colors flex items-center gap-1 justify-center w-full">Track Shipment</button>
+        <p class="text-gray-400 text-[11px]">Enter the phone number the recipient was registered with to unlock full details.</p>
+      </div>
+    </div>
+    <div id="trackResults" class="overflow-y-auto flex-1 p-4"></div>
+  </div>
+</div>
+
+<!-- CHAT BUBBLE -->
+<button id="qt-bubble" onclick="qtToggle()" aria-label="Chat" style="position:fixed;bottom:24px;right:24px;z-index:9999;width:52px;height:52px;border-radius:50%;background:#111827;box-shadow:0 4px 20px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;">
+  <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 12.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+  <div id="qt-badge" style="position:absolute;top:-3px;right:-3px;background:#ef4444;color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;border:2px solid #fff;"></div>
+</button>
+
+<div id="qt-panel" style="position:fixed;bottom:86px;right:24px;z-index:9998;width:300px;background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.14);border:1px solid #e5e7eb;display:none;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif;max-height:440px;">
+  <div style="background:#111827;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;">
+    <div style="width:32px;height:32px;border-radius:50%;background:#c81e2c;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+    <div style="flex:1;"><div style="color:#fff;font-weight:700;font-size:12px;">GLOBAL TRANSIT Support</div><div style="color:rgba(255,255,255,0.5);font-size:10px;">Online · Replies in minutes</div></div>
+    <button onclick="qtToggle()" style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:16px;padding:0;">✕</button>
+  </div>
+  <div id="qt-locked" style="padding:16px 14px;display:flex;flex-direction:column;gap:6px;background:#fff;">
+    <p style="font-size:12px;color:#111827;font-weight:700;margin:0;">Track a shipment first</p>
+    <p style="font-size:11px;color:#6b7280;margin:0;line-height:1.5;">Enter your tracking number and phone number above to unlock support chat for that shipment. Your conversation is saved to that shipment, so it'll be right here even from another device.</p>
+  </div>
+  <div id="qt-name-form" style="padding:14px;display:none;flex-direction:column;gap:8px;background:#fff;border-bottom:1px solid #f3f4f6;">
+    <p style="font-size:11px;color:#6b7280;margin:0;">Enter your name to start chatting</p>
+    <input id="qt-ni" type="text" placeholder="Your name" style="border:1.5px solid #e5e7eb;border-radius:8px;padding:8px 12px;font-size:12px;outline:none;color:#111827;font-family:'Inter',sans-serif;"/>
+    <button onclick="qtStart()" style="background:#111827;color:#fff;border:none;border-radius:8px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">Start Chat</button>
+  </div>
+  <div id="qt-msgs" style="flex:1;overflow-y:auto;padding:12px;display:none;flex-direction:column;gap:6px;background:#f9fafb;">
+    <div style="max-width:85%;padding:8px 12px;border-radius:12px;font-size:12px;background:#fff;color:#111827;border:1px solid #e5e7eb;border-bottom-left-radius:3px;">Hi! Welcome to GLOBAL TRANSIT Support. How can we help?</div>
+  </div>
+  <div id="qt-footer" style="padding:8px;border-top:1px solid #f3f4f6;display:none;gap:6px;background:#fff;">
+    <textarea id="qt-inp" rows="1" placeholder="Type a message..." style="flex:1;border:1.5px solid #e5e7eb;border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Inter',sans-serif;outline:none;color:#111827;resize:none;width:calc(100% - 44px);" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();qtSend();}"></textarea>
+    <button onclick="qtSend()" style="background:#111827;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;float:right;">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const API = window.API_BASE || 'https://globaltransit-backend.onrender.com';
+
+const FLAG_MAP={CN:'🇨🇳',JP:'🇯🇵',DE:'🇩🇪',US:'🇺🇸',AE:'🇦🇪',KR:'🇰🇷',GB:'🇬🇧',FR:'🇫🇷',IT:'🇮🇹',AU:'🇦🇺',CA:'🇨🇦',SG:'🇸🇬',NL:'🇳🇱',IN:'🇮🇳',BR:'🇧🇷',OTHER:'🌐'};
+const TYPE_EMOJI={pickup:'📦',flight:'✈️',transit:'🔄',arrival:'🛬',sort:'🏭',delivery:'🚚',delivered:'✅'};
+
+const DEMO_DATA={
+  'GT-DEMO-01':{id:'GT-DEMO-01',status:'In Transit',pct:60,
+    sender:{name:'TechCore Industries',address:'18 Zhongguancun St',city:'Beijing, CN',tel:'+86 10 5550 1234',email:'logistics@techcore.cn'},
+    receiver:{name:'Marco Electronics GmbH',address:'42 Berliner Str',city:'Munich, DE',tel:'+49 89 555 0182',email:'import@marco.de'},
+    package:{content:'Semiconductor Components',weight:'48kg',qty:'6 Units',orderType:'Paid',shipDate:'2026-05-28',expDate:'2026-06-15',from:'Shenzhen, China'},
+    journey:[
+      {location:'Shenzhen, China',country:'CN',type:'pickup',event:'Shipment Picked Up from Warehouse',date:'May 28, 2026',time:'09:14 AM',done:true},
+      {location:'Guangzhou Airport, China',country:'CN',type:'flight',event:'Departed Origin — Customs Cleared',date:'May 29, 2026',time:'11:45 PM',done:true},
+      {location:'Dubai International, UAE',country:'AE',type:'transit',event:'Transit Hub — Connecting Flight',date:'May 30, 2026',time:'04:22 AM',done:true},
+      {location:'Frankfurt Airport, Germany',country:'DE',type:'arrival',event:'Arrived in Germany — Customs Processing',date:'May 31, 2026',time:'07:05 AM',done:true},
+      {location:'Munich Sorting Center',country:'DE',type:'sort',event:'In Sorting Facility — Processing',date:'Jun 01, 2026',time:'02:30 PM',done:false,active:true},
+      {location:'Munich, Germany',country:'DE',type:'delivery',event:'Out for Local Delivery',date:'Jun 02, 2026',time:'—',done:false},
+      {location:'42 Berliner Str, Munich',country:'DE',type:'delivered',event:'Delivered to Recipient',date:'Jun 15, 2026',time:'—',done:false}
+    ]},
+  'GT-DEMO-02':{id:'GT-DEMO-02',status:'Delivered',pct:100,
+    sender:{name:'Pacific Pharma Ltd',address:'7-2 Nishiki',city:'Nagoya, JP',tel:'+81 52 555 7890',email:'export@pacpharma.jp'},
+    receiver:{name:'MedLink USA Corp',address:'3920 Westview Plaza',city:'Dallas, TX',tel:'+1 214 555 0990',email:'receiving@medlink.us'},
+    package:{content:'Medical Devices',weight:'22kg',qty:'4 Cartons',orderType:'Paid',shipDate:'2026-05-10',expDate:'2026-05-22',from:'Nagoya, Japan'},
+    journey:[
+      {location:'Nagoya, Japan',country:'JP',type:'pickup',event:'Shipment Collected from Sender',date:'May 10, 2026',time:'10:00 AM',done:true},
+      {location:'Nagoya Port, Japan',country:'JP',type:'flight',event:'Loaded — Departed by Air Freight',date:'May 11, 2026',time:'08:15 PM',done:true},
+      {location:'Incheon Airport, South Korea',country:'KR',type:'transit',event:'Layover — Connecting to US',date:'May 12, 2026',time:'01:40 AM',done:true},
+      {location:'Los Angeles, USA',country:'US',type:'arrival',event:'Arrived in USA — Customs Clearance',date:'May 12, 2026',time:'06:55 PM',done:true},
+      {location:'Dallas Hub, TX',country:'US',type:'sort',event:'Arrived at Regional Facility',date:'May 14, 2026',time:'11:20 AM',done:true},
+      {location:'Dallas, TX USA',country:'US',type:'delivery',event:'Out for Final Delivery',date:'May 22, 2026',time:'08:00 AM',done:true},
+      {location:'3920 Westview Plaza, Dallas',country:'US',type:'delivered',event:'Successfully Delivered',date:'May 22, 2026',time:'02:14 PM',done:true}
+    ]}
+};
+
+// ── MODAL ──
+function heroTrack(){const v=document.getElementById('heroInput').value.trim();if(!v)return;openModal(v);}
+function openModal(num=''){
+  document.getElementById('trackModal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+  if(num){document.getElementById('modalInput').value=num;setTimeout(()=>document.getElementById('modalPhone').focus(),100);}
+  else setTimeout(()=>document.getElementById('modalInput').focus(),100);
+}
+function closeModal(){document.getElementById('trackModal').classList.add('hidden');document.body.style.overflow='';}
+document.getElementById('trackModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+function normPhone(p){return (p||'').replace(/[^0-9]/g,'').slice(-8);}
+
+async function doTrack(){
+  const num=document.getElementById('modalInput').value.trim().toUpperCase();
+  const phone=document.getElementById('modalPhone').value.trim();
+  const el=document.getElementById('trackResults');
+  if(!num){el.innerHTML='<div class="text-center py-10"><p class="text-gray-500 text-sm">Enter a tracking number to continue.</p></div>';return;}
+  if(!phone){el.innerHTML='<div class="text-center py-10"><p class="text-gray-500 text-sm">Enter the recipient\'s phone number to continue.</p></div>';return;}
+  const btn=document.getElementById('trackBtn');
+  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
+  let s=null;
+  try{const r=await fetch(API+'/api/shipments/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trackingId:num,phone:phone})});if(r.ok)s=await r.json();}catch(e){}
+  if(!s){
+    const demo=DEMO_DATA[num];
+    if(demo && normPhone(demo.receiver?.tel)===normPhone(phone)) s=demo;
+  }
+  btn.innerHTML='Track Shipment';btn.disabled=false;
+  if(!s){
+    el.innerHTML='<div class="text-center py-10"><div class="text-5xl mb-3">🔒</div><h3 class="font-bold text-gray-900 mb-2">Details Locked</h3><p class="text-gray-500 text-sm">We couldn\'t match that tracking number with the phone number on file. Check both and try again, or use the phone number the sender registered at checkout.</p></div>';
+    return;
+  }
+  window.__currentPhone=phone;
+  renderResult(s,el);
+}
+
+function renderResult(s,el){
+  const pct=s.pct||0;
+  const statusStep={'Pending':0,'In Transit':2,'Out for Delivery':3,'Delivered':4}[s.status]||1;
+  const lastDone=s.journey?.filter(j=>j.done).slice(-1)[0];
+  const stops=s.journey||[];
+  const sc={'Pending':{bg:'#fefce8',c:'#d97706'},'In Transit':{bg:'#fdf2f3',c:'#c81e2c'},'Out for Delivery':{bg:'#f0fdfa',c:'#0891b2'},'Delivered':{bg:'#f0fdf4',c:'#16a34a'}}[s.status]||{bg:'#fdf2f3',c:'#c81e2c'};
+
+  const stepIcons=[
+    '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+    '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>',
+    '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>',
+    '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 12.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>',
+    '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+  ];
+  const stepLabels=['Order\nConfirmed','Picked\nUp','In\nTransit','Out for\nDelivery','Delivered'];
+
+  el.innerHTML=`
+    <div style="background:#fff;border:1.5px solid #e5e7eb;border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;">
+        <div>
+          <p style="color:#9ca3af;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;">Tracking ID</p>
+          <p style="color:#111827;font-family:monospace;font-weight:900;font-size:1rem;">${s.id}</p>
+        </div>
+        <span style="background:${sc.bg};color:${sc.c};border:1.5px solid ${sc.c}40;padding:4px 12px;border-radius:99px;font-size:0.7rem;font-weight:700;white-space:nowrap;">${s.status}</span>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="height:4px;background:#f3f4f6;border-radius:99px;overflow:hidden;">
+          <div id="pFill" style="height:100%;background:linear-gradient(90deg,#111827,#374151);border-radius:99px;width:0%;transition:width 1.5s cubic-bezier(0.65,0,0.35,1);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;">
+          <span style="color:#9ca3af;font-size:0.65rem;">Progress</span>
+          <span style="color:#111827;font-weight:700;font-size:0.65rem;">${pct}%</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:10px;margin-bottom:10px;">
+        <div style="flex:1;"><p style="color:#9ca3af;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">From</p><p style="color:#111827;font-weight:700;font-size:0.78rem;">${s.package?.from||s.sender?.city||'—'}</p></div>
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#111827" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        <div style="flex:1;text-align:right;"><p style="color:#9ca3af;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">To</p><p style="color:#111827;font-weight:700;font-size:0.78rem;">${s.receiver?.city||'—'}</p></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+        <p style="color:#9ca3af;font-size:0.65rem;">${lastDone?'Updated: '+lastDone.date:'—'}</p>
+        <p style="color:#9ca3af;font-size:0.65rem;">Expected: <span style="color:#111827;font-weight:600;">${s.package?.expDate||'—'}</span></p>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1.5px solid #e5e7eb;border-radius:16px;padding:16px;margin-bottom:12px;">
+      <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:12px;">Shipment Progress</p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;">
+        ${stepLabels.map((lbl,i)=>{
+          const isDone=i<statusStep,isActive=i===statusStep;
+          const bg=isDone||isActive?'#111827':'#f3f4f6';
+          const ic=isDone||isActive?'#fff':'#9ca3af';
+          const lc=isDone?'#16a34a':isActive?'#111827':'#9ca3af';
+          return`<div style="display:flex;flex-direction:column;align-items:center;gap:5px;"><div style="width:36px;height:36px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;color:${ic};">${isDone?'<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>':stepIcons[i].replace('stroke="currentColor"','stroke="'+ic+'"')}</div><div style="font-size:0.55rem;text-align:center;line-height:1.3;color:${lc};font-weight:${isDone||isActive?'700':'400'};">${lbl.replace('\n','<br>')}</div></div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <a id="fullDetailsLink" href="tracking-details-v3.html?t=${s.id}&phone=${encodeURIComponent(window.__currentPhone||'')}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#111827;color:#fff;border-radius:12px;padding:13px;font-weight:700;font-size:0.875rem;text-decoration:none;width:100%;box-sizing:border-box;">
+      View Full Shipment Details
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+    </a>`;
+
+  setTimeout(()=>{const p=document.getElementById('pFill');if(p)p.style.width=pct+'%';},200);
+
+  // Unlock support chat for this verified shipment (session tied to tracking+phone, not device)
+  if(window.qtUnlock) window.qtUnlock(s.id, window.__currentPhone);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const t=new URLSearchParams(window.location.search).get('t');
+  if(t)openModal(t);
+});
+
+// ── CHAT ──
+// Session identity is derived from trackingId + recipient phone (not a random
+// per-browser id). That means the same shipment opened on any device, any
+// browser, reproduces the exact same sessionId and pulls up the same thread —
+// nothing is lost by switching devices, because nothing was ever tied to one.
+(function(){
+  var API2=window.API_BASE||'https://globaltransit-backend.onrender.com';
+  var isOpen=false,lastCount=0,poll=null,sid=null,unlocked=false;
+
+  function normPhoneChat(p){return (p||'').replace(/[^0-9]/g,'').slice(-8);}
+  function sessionIdFor(trackingId,phone){
+    return 'ship_'+trackingId.trim().toUpperCase()+'_'+normPhoneChat(phone);
+  }
+
+  // Restore an already-unlocked shipment on refresh, within this browser only —
+  // convenience, not the source of truth. Re-entering tracking+phone on any
+  // device works identically because sid is always recomputed the same way.
+  var savedTrack=sessionStorage.getItem('gt_active_track');
+  var savedPhone=sessionStorage.getItem('gt_active_phone');
+  if(savedTrack&&savedPhone) qtUnlock(savedTrack,savedPhone);
+
+  window.qtUnlock=function(trackingId,phone){
+    if(!trackingId||!phone)return;
+    sid=sessionIdFor(trackingId,phone);
+    unlocked=true;
+    sessionStorage.setItem('gt_active_track',trackingId);
+    sessionStorage.setItem('gt_active_phone',phone);
+    document.getElementById('qt-locked').style.display='none';
+    var savedName=localStorage.getItem('gt_name_'+sid);
+    if(savedName) qtInit(savedName); else document.getElementById('qt-name-form').style.display='flex';
+  };
+
+  window.qtToggle=function(){
+    isOpen=!isOpen;
+    document.getElementById('qt-panel').style.display=isOpen?'flex':'none';
+    if(isOpen)document.getElementById('qt-badge').style.display='none';
+  };
+  window.qtStart=function(){
+    var n=document.getElementById('qt-ni').value.trim();
+    if(!n){document.getElementById('qt-ni').style.borderColor='#ef4444';return;}
+    localStorage.setItem('gt_name_'+sid,n);
+    qtInit(n);
+  };
+  function qtInit(n){
+    fetch(API2+'/api/chat/session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sid,userName:n})})
+    .then(function(r){return r.json();}).then(function(d){
+      document.getElementById('qt-name-form').style.display='none';
+      document.getElementById('qt-msgs').style.display='flex';
+      document.getElementById('qt-footer').style.display='flex';
+      if(d.messages&&d.messages.length)qtRender(d.messages);
+      lastCount=d.messages?d.messages.length:0;
+      if(!poll)poll=setInterval(function(){
+        if(!unlocked)return;
+        fetch(API2+'/api/chat/session/'+sid).then(function(r){return r.json();}).then(function(d){
+          if(d.messages&&d.messages.length>lastCount){qtRender(d.messages);lastCount=d.messages.length;if(!isOpen){var b=document.getElementById('qt-badge');b.style.display='flex';b.textContent=d.messages.filter(function(m){return m.role==='admin';}).length;}}
+        }).catch(function(){});
+      },3000);
+    }).catch(function(){});
+  }
+  function qtRender(msgs){
+    var c=document.getElementById('qt-msgs');
+    c.innerHTML='<div style="max-width:85%;padding:8px 12px;border-radius:12px;font-size:12px;background:#fff;color:#111827;border:1px solid #e5e7eb;border-bottom-left-radius:3px;">Hi! Welcome to GLOBAL TRANSIT Support. How can we help?</div>';
+    msgs.forEach(function(m){
+      var d=document.createElement('div');
+      var isUser=m.role==='user';
+      d.style.cssText='max-width:85%;padding:8px 12px;border-radius:12px;font-size:12px;'+(isUser?'background:#111827;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;':'background:#fff;color:#111827;align-self:flex-start;border-bottom-left-radius:3px;border:1px solid #e5e7eb;');
+      d.textContent=m.text;c.appendChild(d);
+    });
+    c.scrollTop=c.scrollHeight;
+  }
+  window.qtSend=function(){
+    if(!unlocked)return;
+    var inp=document.getElementById('qt-inp');var text=inp.value.trim();if(!text)return;
+    inp.value='';
+    var n=localStorage.getItem('gt_name_'+sid)||'Guest';
+    var c=document.getElementById('qt-msgs');var d=document.createElement('div');
+    d.style.cssText='max-width:85%;padding:8px 12px;border-radius:12px;font-size:12px;background:#111827;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;';
+    d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight;
+    fetch(API2+'/api/chat/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sid,text:text,userName:n})}).catch(function(){});
+  };
+})();
+</script>
+</body>
+</html>
