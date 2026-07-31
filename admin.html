@@ -30,7 +30,7 @@ input[type=range]{accent-color:#c81e2c;width:100%;}
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-<script>window.API_BASE='https://globaltransit-backend.onrender.com';</script>
+<script>window.API_BASE='https://global-transit-backend.onrender.com';</script>
 
 <!-- ══ LOGIN ══ -->
 <div id="loginScreen" class="min-h-screen flex p-0" style="background:#0a0f1e;">
@@ -717,7 +717,7 @@ window.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('st-total').textContent=s.total??0;
       document.getElementById('st-transit').textContent=s.transit??0;
       document.getElementById('st-delivered').textContent=s.delivered??0;
-    document.getElementById('st-pending').textContent=s.pending??0;
+      document.getElementById('st-pending').textContent=s.pending??0;
       addStop();addStop();
     }).catch(()=>{authToken='';localStorage.removeItem('gt_token');});
   }
