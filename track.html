@@ -382,10 +382,13 @@ const DEMO_DATA={
 
 // ── MODAL ──
 function heroTrack(){const v=document.getElementById('heroInput').value.trim();if(!v)return;openModal(v);}
-function openModal(num=''){
+function openModal(num='',phone=''){
   document.getElementById('trackModal').classList.remove('hidden');
   document.body.style.overflow='hidden';
-  if(num){document.getElementById('modalInput').value=num;setTimeout(()=>document.getElementById('modalPhone').focus(),100);}
+  if(num)document.getElementById('modalInput').value=num;
+  if(phone)document.getElementById('modalPhone').value=phone;
+  if(num&&phone)setTimeout(()=>document.getElementById('trackBtn').focus(),100);
+  else if(num)setTimeout(()=>document.getElementById('modalPhone').focus(),100);
   else setTimeout(()=>document.getElementById('modalInput').focus(),100);
 }
 function closeModal(){document.getElementById('trackModal').classList.add('hidden');document.body.style.overflow='';}
@@ -486,8 +489,10 @@ function renderResult(s,el){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  const t=new URLSearchParams(window.location.search).get('t');
-  if(t)openModal(t);
+  const params=new URLSearchParams(window.location.search);
+  const t=params.get('t');
+  const phone=params.get('phone');
+  if(t)openModal(t,phone||'');
 });
 
 // ── CHAT ──

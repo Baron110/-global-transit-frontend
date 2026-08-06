@@ -651,23 +651,12 @@ function renderTable(all){
       <td class="px-5 py-4 font-mono text-xs text-gray-400">${s.package?.expDate||'—'}</td>
       <td class="px-5 py-4 text-right">
         <div class="flex justify-end gap-1.5">
-          <button onclick="copyTrackInfo('${s.id}','${(s.receiver?.tel||'').replace(/'/g,"\\'")}')" title="Copy tracking number + phone" class="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center text-xs hover:bg-red-50 hover:border-red-300 transition-colors cursor-pointer">📋</button>
+          <a href="track.html?t=${encodeURIComponent(s.id)}&phone=${encodeURIComponent(s.receiver?.tel||'')}" target="_blank" title="Open tracking, pre-filled" class="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center text-xs hover:bg-red-50 hover:border-red-300 transition-colors no-underline">🔗</a>
           <button onclick="openEdit('${s.id}')" class="w-8 h-8 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center text-xs hover:bg-red-50 hover:border-red-300 transition-colors cursor-pointer">✏️</button>
           <button onclick="delShipment('${s.id}')" class="w-8 h-8 bg-red-50 border border-red-200 rounded-lg flex items-center justify-center text-xs hover:bg-red-100 transition-colors cursor-pointer">🗑️</button>
         </div>
       </td>
     </tr>`).join('');
-}
-
-function copyTrackInfo(id,phone){
-  const base = window.location.origin + window.location.pathname.replace('admin.html','');
-  const link = base + 'tracking-details-v3.html?t=' + encodeURIComponent(id) + (phone ? '&phone=' + encodeURIComponent(phone) : '');
-  const text = phone ? `${id}  |  ${phone}  |  ${link}` : `${id}  |  ${link}`;
-  navigator.clipboard.writeText(text).then(()=>{
-    showToast(phone?'Copied number, phone + direct link ✓':'Copied number + link ✓','success');
-  }).catch(()=>{
-    showToast('Could not copy — clipboard blocked','error');
-  });
 }
 async function delShipment(id){if(!confirm('Delete?'))return;try{await apiFetch('/api/shipments/'+id,'DELETE');showToast('Deleted');loadShipments();loadStats();}catch(e){showToast('Error','error');}}
 let editingJourney=[];
