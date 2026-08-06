@@ -660,9 +660,11 @@ function renderTable(all){
 }
 
 function copyTrackInfo(id,phone){
-  const text = phone ? `${id}  |  ${phone}` : id;
+  const base = window.location.origin + window.location.pathname.replace('admin.html','');
+  const link = base + 'tracking-details-v3.html?t=' + encodeURIComponent(id) + (phone ? '&phone=' + encodeURIComponent(phone) : '');
+  const text = phone ? `${id}  |  ${phone}  |  ${link}` : `${id}  |  ${link}`;
   navigator.clipboard.writeText(text).then(()=>{
-    showToast(phone?'Copied tracking # + phone ✓':'Copied tracking # ✓','success');
+    showToast(phone?'Copied number, phone + direct link ✓':'Copied number + link ✓','success');
   }).catch(()=>{
     showToast('Could not copy — clipboard blocked','error');
   });
