@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Track Shipment | GLOBAL TRANSIT</title>
+<title>Track Shipment | GLOBE-TRANSIT</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -113,7 +113,7 @@ const DEMO_DATA={
       Back
     </a>
     <a href="track.html" style="text-decoration:none;">
-      <div class="wordmark" style="font-size:1.1rem;color:#111827;">GLOBAL<span> TRANSIT</span></div>
+      <div class="wordmark" style="font-size:1.1rem;color:#111827;">GLOBE<span>-TRANSIT</span></div>
     </a>
     <div style="width:60px;"></div>
   </div>
@@ -281,7 +281,7 @@ const DEMO_DATA={
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
     </div>
     <div style="flex:1;">
-      <div style="color:#fff;font-weight:700;font-size:13px;">GLOBAL TRANSIT Support</div>
+      <div style="color:#fff;font-weight:700;font-size:13px;">GLOBE-TRANSIT Support</div>
       <div style="display:flex;align-items:center;gap:5px;margin-top:2px;"><div class="qt-dot"></div><span style="color:rgba(255,255,255,0.55);font-size:11px;">Online · Replies in minutes</span></div>
     </div>
     <button id="qtExpandBtn" onclick="qtExpand()" aria-label="Expand chat" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;padding:4px;display:flex;margin-right:2px;">
@@ -295,7 +295,7 @@ const DEMO_DATA={
     <button onclick="qtStart()">Start Chat</button>
   </div>
   <div id="qt-msgs" style="display:none;">
-    <div class="qt-m admin"><div>Hi! Welcome to GLOBAL TRANSIT Support. How can we help you?</div><div class="qt-t">Support Team</div></div>
+    <div class="qt-m admin"><div>Hi! Welcome to GLOBE-TRANSIT Support. How can we help you?</div><div class="qt-t">Support Team</div></div>
   </div>
   <div id="qt-footer" style="display:none;">
     <input id="qt-img-inp" type="file" accept="image/*" style="display:none;" onchange="qtPickImage(event)"/>
@@ -328,7 +328,7 @@ async function load(){
   var phone=params.get('phone')||'';
   if(!id){showNotFound();return;}
   if(!phone){showLocked();return;}
-  document.title=id+' | GLOBAL TRANSIT';
+  document.title=id+' | GLOBE-TRANSIT';
   var s=null;
   try{
     var r=await fetch(window.API_BASE+'/api/shipments/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trackingId:id,phone:phone})});
@@ -512,10 +512,10 @@ function downloadReceipt(){
   var hdr=el('div',{cls:'hdr',parent:body});
   var logoWrap=el('div',{parent:hdr});
   var logo=el('div',{cls:'logo',parent:logoWrap});
-  logo.appendChild(d.createTextNode('GLOBAL'));
-  el('span',{text:' TRANSIT',parent:logo});
+  logo.appendChild(d.createTextNode('GLOBE'));
+  el('span',{text:'-TRANSIT',parent:logo});
   el('div',{css:'height:2px;background:#c81e2c;width:70px;margin-top:3px;border-radius:1px;',parent:logoWrap});
-  el('div',{text:'Global Logistics',css:'font-size:9px;font-weight:700;letter-spacing:0.18em;color:#9ca3af;text-transform:uppercase;margin-top:3px;',parent:logoWrap});
+  el('div',{text:'Globe-Transit Logistics',css:'font-size:9px;font-weight:700;letter-spacing:0.18em;color:#9ca3af;text-transform:uppercase;margin-top:3px;',parent:logoWrap});
   var hdrRight=el('div',{css:'text-align:right;',parent:hdr});
   el('div',{text:'Shipment Receipt',css:'color:#9ca3af;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;',parent:hdrRight});
   el('div',{text:date,css:'font-size:13px;font-weight:600;color:#374151;',parent:hdrRight});
@@ -546,7 +546,7 @@ function downloadReceipt(){
     el('td',{text:row[1]||'—',parent:tr});
   });
 
-  el('div',{text:'Auto-generated receipt · GLOBAL TRANSIT Logistics · © 2026',cls:'footer',parent:body});
+  el('div',{text:'Auto-generated receipt · GLOBE-TRANSIT Logistics · © 2026',cls:'footer',parent:body});
 
   w.onload=function(){w.focus();w.print();};
 }
@@ -632,7 +632,7 @@ function downloadReceipt(){
   function qtRender(msgs){
     var c=document.getElementById('qt-msgs');
     c.innerHTML='';
-    c.appendChild(qtBubble({role:'admin',text:'Hi! Welcome to GLOBAL TRANSIT Support. How can we help you?'}));
+    c.appendChild(qtBubble({role:'admin',text:'Hi! Welcome to GLOBE-TRANSIT Support. How can we help you?'}));
     msgs.forEach(function(m){ c.appendChild(qtBubble(m)); });
     c.scrollTop=c.scrollHeight;
   }
